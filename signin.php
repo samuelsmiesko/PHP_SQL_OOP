@@ -1,16 +1,18 @@
 <?php 
- require('/xampp/htdocs/dashboard/opp/dbh.inc.php'); 
- require('/xampp/htdocs/dashboard/opp/user.inc.php');    
- require('/xampp/htdocs/dashboard/opp/viewuser.inc.php'); 
- require('/xampp/htdocs/dashboard/opp/checkUser.inc.php'); 
 
- $errors = [];
+require('/xampp/htdocs/dashboard/opp/inc/dbh.inc.php'); 
+require('/xampp/htdocs/dashboard/opp/inc/user.inc.php');    
+require('/xampp/htdocs/dashboard/opp/inc/checkUser.inc.php'); 
+
+if(isset($_SESSION["user_name"])){
+    session_unset();
+}
 
 if(isset($_POST['submit'])){
      
     $checks = new CheckUser($_POST);
     $errors = $checks->validateForm();
-      
+
 }
 
 
