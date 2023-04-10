@@ -4,18 +4,6 @@ class ImageUpload extends User{
 
    public function MoveFile(){
       $fileName = $_FILES['fileToUpload']['name'];
-      //$tempName = $_FILES['fileToUpload']['tmp_name'];
-
-   //    if(isset($fileName)){
-
-   //       if(!empty($fileName)){
-   //          $location = "Myfiles/";
-   //          if(move_uploaded_file($tempName, $location.$fileName)){
-   //             return;
-   //          }
-
-   //       }
-   //   }
 
       $line = new dbh($_POST);
       $conn = ($line->connect());
@@ -31,7 +19,7 @@ class ImageUpload extends User{
           mysqli_close($conn);
 
       }
-
+      
    }
 
    public function getPhoto(){
@@ -41,7 +29,6 @@ class ImageUpload extends User{
       $conn = ($line->connect());
         
       $id = $_SESSION['id'];
-
     
       $sql = "SELECT NameImage FROM datas WHERE id = '$id'";
       
@@ -51,5 +38,7 @@ class ImageUpload extends User{
       
       $conn->close();
    }
+
+
 }
 ?>

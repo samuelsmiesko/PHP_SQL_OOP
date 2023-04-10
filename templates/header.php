@@ -1,18 +1,25 @@
 <?php
 
+
+
 if(isset($_SESSION["user_name"])){
     
     $result = 'warning';
     $sign = 'out';
     $able = 'disabled';
     $name = $_SESSION["user_name"];
+    $class = new ImageUpload($_POST);
+    $foto = $class->getPhoto();
+    $src = "./Myfiles/" .  $foto ;
+    $visiblity = '';
     
 }else{
     $result = 'white';
     $sign = 'in';
     $able = '';
     $name = 'Guest';
-    
+    $src = "templates/img/empty.jpg";
+    $visiblity = 'disabled';
 }
 
 
@@ -26,7 +33,7 @@ if(isset($_SESSION["user_name"])){
 
 </head>
 <body>  
-
+    <?php include('templates/cookie.php'); ?> 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark ">
 
     <div class="container-fluid">
@@ -37,7 +44,7 @@ if(isset($_SESSION["user_name"])){
         </button>
         <div class="collapse navbar-collapse" id="#navbarSupportedContent">
             <li class="nav-item">
-            <a class="nav-link" href="/dashboard/opp/add.php">Add</a>
+            <a class="nav-link <?php echo $visiblity ?>" href="/dashboard/opp/add.php">Add</a>
             </li>
             <li class="nav-item">
             <a class="nav-link <?php echo $able ?>" href="/dashboard/opp/signup.php">Sign up</a>
@@ -50,7 +57,7 @@ if(isset($_SESSION["user_name"])){
     
     <ul class="navbar-nav d-flex float-left">
         <li class="text-center ms-4   list-unstyled">
-            <a class="nav-link" href="/dashboard/opp/profile.php"><img src="templates/img/empty.jpg" style="width:30px" class=" rounded mx-auto d-block" alt="img"></a>
+            <a class="nav-link" href="/dashboard/opp/profile.php"><img src="<?php  echo $src ?>" style="width:30px" class=" rounded mx-auto d-block" alt="img"></a>
         </li>
         <li class="nav-item ms-2  d-flex list-unstyled">
             <a class="nav-link text-<?php echo $result ?>">Hello <?php echo htmlspecialchars($name); ?></a>
