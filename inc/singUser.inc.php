@@ -1,7 +1,5 @@
 <?php
 
-
-
 class singUser extends User{
 
     private $InputData;
@@ -57,17 +55,8 @@ class singUser extends User{
         $name = mysqli_real_escape_string($conn, $val3);
         $password = mysqli_real_escape_string($conn, $val2);
 
-        // if(isset($_COOKIE[$name])) {
-        //   echo "Cookie named '" . $email . "' is set!";
-        //   setcookie($email, $password , time() + (86400 * 30), "/");
-        //   include('templates/cookie.php');
-        // } else {
-        //   echo "Cookie is not set!<br>";
-          
-        // }
-
-        
-		    $sql = "INSERT INTO datas(name,email,password) VALUES('$name','$email','$password')";
+ 
+		    $sql = "INSERT INTO datas(name,email,password,NameImage) VALUES('$name','$email','$password','empty.jpg')";
 
         if(mysqli_query($conn, $sql)){
             

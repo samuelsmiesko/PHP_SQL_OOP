@@ -36,6 +36,7 @@ class uploadText extends User{
         
 		    $sql = "UPDATE datas SET ProfileText='$Text' WHERE id='$id'";
         
+        
         if(mysqli_query($conn, $sql)){
             
           mysqli_close($conn);
@@ -50,9 +51,6 @@ class uploadText extends User{
       $line = new dbh($_POST);
       $conn = ($line->connect());
         
-      $id = $_SESSION['id'];
-
-    
       $sql = "SELECT ProfileText FROM datas WHERE id = '$id'";
       
       $result = $conn->query($sql);

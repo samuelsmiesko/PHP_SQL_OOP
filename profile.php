@@ -5,7 +5,7 @@ require('/xampp/htdocs/dashboard/opp/inc/user.inc.php');
 require('/xampp/htdocs/dashboard/opp/inc/checkUser.inc.php'); 
 require('/xampp/htdocs/dashboard/opp/inc/uploadText.inc.php'); 
 require('/xampp/htdocs/dashboard/opp/inc/image.inc.php'); 
-require_once('./inc/uploadfile.php');
+
 
 $errors = [];
 $Text = '';
@@ -17,6 +17,14 @@ if(isset($_SESSION["user_name"])){
     $info = $class->showText();
     $class = new ImageUpload($_POST);
     $foto = $class->getPhoto();
+    
+    for($x = 0; $x < count($foto); $x++) {
+        
+        if($_SESSION["user_name"]==$foto[$x]['name']){
+            $foto = $foto[$x]['NameImage'];
+            break;
+        }
+      }
     $src = "./Myfiles/" .  $foto ;
     
     $class = new ImageUpload($_POST);
@@ -55,38 +63,38 @@ if(isset($_SESSION["user_name"])){
 
     <?php include('templates/header.php'); ?>
     
-    
-    <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
-        <div class="d-flex justify-content-center ">
-            <div class="card mt-4 col-md-8" >
-                <div class="card-body">
-                    <div class="d-flex">
-                        <img class="card-img-top m-2" src="<?php  echo $src ?>" style="width:150px" alt="Card image">  
-                        <!--  -->
-                        <div class="d-grid">
-                            <h4 class="pt-3 card-title"><?php echo htmlspecialchars($name); ?></h4>
-                            <p class="card-text" ><?php  echo $info ?></p>
+    <div class="container" style="height: 100vh;">
+        <form  method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
+            <div class="d-flex justify-content-center ">
+                <div class="card mt-4 col-md-10" >
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <img class="card-img-top m-2" src="<?php  echo $src ?>" style="width:150px" alt="Card image">  
+                            
+                            <div class="d-grid">
+                                <h4 class="pt-3 card-title"><?php echo htmlspecialchars($name); ?></h4>
+                                <p class="card-text" ><?php  echo $info ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control <?php echo $vis ?>" type="submit" name="upload" rows="5" id="comment" values="<?php if (isset($_POST['upload'])) echo htmlspecialchars($_POST['upload']);?>"></textarea>
-                    </div>
-                        <label class="form-label mt-3 <?php echo $vis ?>" >Upload image from directory</label>
-                        <input type="file" class="form-control <?php echo $vis ?>" name="fileToUpload" />                       
-                    <div class="row">
-                        <div class="col-sm-12 col-md-8 btn-group mt-3 ">
-                            <input type="submit" name="UploadImageButton" class="btn btn-success <?php echo $vis ?>" value="Upload image"></input>
-                            <input type="submit" name="UploadTextButton" class="btn btn-info <?php echo $vis ?>" value="Upload text"></input>
+                        <div class="form-group">
+                            <textarea class="form-control <?php echo $vis ?>" type="submit" name="upload" rows="5" id="comment" values="<?php if (isset($_POST['upload'])) echo htmlspecialchars($_POST['upload']);?>"></textarea>
                         </div>
-                        <div class="col-sm-12 col-md-4 mt-3 ">
-                            <input href="#" type="submit" name="submitDelete" class="btn btn-danger <?php echo $vis ?> " value="Remove profile"></input>
+                            <label class="form-label mt-3 <?php echo $vis ?>" >Upload image from directory</label>
+                            <input type="file" class="form-control <?php echo $vis ?>" name="fileToUpload" />                       
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8 btn-group mt-3 ">
+                                <input type="submit" name="UploadImageButton" class="btn btn-success <?php echo $vis ?>" value="Upload image"></input>
+                                <input type="submit" name="UploadTextButton" class="btn btn-info <?php echo $vis ?>" value="Upload text"></input>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mt-3 ">
+                                <input href="#" type="submit" name="submitDelete" class="btn btn-danger <?php echo $vis ?> " value="Remove profile"></input>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>    
-    </form>
-    
+            </div>    
+        </form>
+    </div>
     </html>
     <?php include('templates/footer.php'); ?>
 </html>

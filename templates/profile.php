@@ -62,7 +62,7 @@ if(isset($_SESSION["user_name"])){
                 <div class="card-body">
                     <div class="d-flex">
                         <img class="card-img-top m-2" src="<?php  echo $src ?>" style="width:150px" alt="Card image">  
-                        <!--  -->
+                        
                         <div class="d-grid">
                             <h4 class="pt-3 card-title"><?php echo htmlspecialchars($name); ?></h4>
                             <p class="card-text" ><?php  echo $info ?></p>
@@ -86,7 +86,7 @@ if(isset($_SESSION["user_name"])){
             </div>
         </div>    
     </form>
-    
-    </html>
     <?php include('templates/footer.php'); ?>
+    </html>
+    
 </html>

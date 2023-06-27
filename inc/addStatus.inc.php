@@ -26,28 +26,29 @@ class addStatus extends User{
 
     public function upText(){
         
-        $val = trim($this->InputData['uploadStatus']);
-        $a=array();
+      $val = trim($this->InputData['uploadStatus']);
+      
 
-        $line = new dbh($_POST);
-        $conn = ($line->connect());
-        $Name = $_SESSION['user_name'];
-        $Text = mysqli_real_escape_string($conn, $val);
-        
-        
-		    $sql = "INSERT INTO statuses(Text, Autor) VALUES('$Text','$Name')";
+      $line = new dbh($_POST);
+      $conn = ($line->connect());
+      $Name = $_SESSION['user_name'];
+      $Text = mysqli_real_escape_string($conn, $val);
+      
+      
+      $sql = "INSERT INTO statuses(Text, Autor) VALUES('$Text','$Name')";
 
-        if(mysqli_query($conn, $sql)){
-            
-            header('Location: add.php');
-            
-        }
+      if(mysqli_query($conn, $sql)){
+          
+          header('Location: add.php');
+          
+      }
+
 
     }
 
     public function showStatus(){
         
-        $sql = "SELECT Autor, id, Text FROM statuses";
+        $sql = "SELECT Autor, id, Likes, Text FROM statuses";
         $result = $this->connect()->query($sql);
         $numRows = $result->num_rows;
         
@@ -55,13 +56,13 @@ class addStatus extends User{
             while($row = $result->fetch_assoc()){
                 $status[] = $row;
                 
-                
             }
             return $status;
         }
-        
-        
+          
     }
+
+
 
     
     function __destruct() {

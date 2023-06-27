@@ -54,8 +54,6 @@ class CheckUser extends User{
             $checkEmail = $line[$x]['email'];
             $checkPass = $line[$x]['password'];
             
-            
-            
             array_push($a,$checkEmail);
             if($checkEmail===$val){
               

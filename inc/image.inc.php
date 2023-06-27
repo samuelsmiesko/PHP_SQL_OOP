@@ -24,19 +24,28 @@ class ImageUpload extends User{
 
    public function getPhoto(){
 
-      $id = $_SESSION['id'];
+      
       $line = new dbh($_POST);
       $conn = ($line->connect());
         
-      $id = $_SESSION['id'];
-    
-      $sql = "SELECT NameImage FROM datas WHERE id = '$id'";
+      $sql = "SELECT name,NameImage FROM datas ";
       
       $result = $conn->query($sql);
-      $row = $result->fetch_assoc();
-      return $row['NameImage'];
       
+      $numRows = $result->num_rows;
+      
+      if($numRows > 0){
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+                
+
+                
+            }
+        }
+
+      return $data;
       $conn->close();
+      
    }
 
 
